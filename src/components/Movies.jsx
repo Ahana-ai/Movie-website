@@ -4,16 +4,19 @@ import { AppContext } from "../context";
 
 const Movies = () => {
   const { movie } = useContext(AppContext);
+
   return (
     <>
       <section>
         <div className="">
           {movie.map((currMovie) => {
             const { imdbID, Title, Poster } = currMovie;
+            //use js to cut the string short and replace it with dots
+            const movieName = Title.substring(0, 15);
             return( <NavLink to={`movie/${imdbID}`} key={imdbID}>
               <div className="card">
                 <div>
-                  <h2>{Title}</h2>
+                  <h2>{movieName > 15 ? `movieName...` : movieName}</h2>
                   <img src={Poster} alt={imdbID} />
                 </div>
               </div>

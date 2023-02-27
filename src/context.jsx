@@ -1,8 +1,7 @@
 import { createContext, useEffect, useState } from "react";
-
 const AppContext = createContext();
 
-const API_URL = ` http://www.omdbapi.com/?i=tt3896198&apikey=70c95987&s=titanic`
+const API_URL = `http://www.omdbapi.com/?apikey=${import.meta.env.VITE_APP_API_KEY}&s=jumanji`
 
 const AppProvider = ({children}) => {
     //useState to fetch items from the 'Search' array from api
