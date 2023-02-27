@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 const AppContext = createContext();
 
-const API_URL = `http://www.omdbapi.com/?apikey=${
+export const API_URL = `http://www.omdbapi.com/?apikey=${
   import.meta.env.VITE_APP_API_KEY
 }`;
 
@@ -11,7 +11,7 @@ const AppProvider = ({ children }) => {
   //useState to show error
   const [isError, setIsError] = useState({ show: "false", msg: "" });
   //useState to find the movie in search box
-  const [query, setQuery] = useState("jumanji");
+  const [query, setQuery] = useState("");
 
   //Function to call the api url
   const getMovies = async (url) => {
@@ -22,11 +22,15 @@ const AppProvider = ({ children }) => {
 
       //when the response to promise is true then set the movie
       if (data.Response === "True") {
+        setIsError({
+          show: false,
+          msg: null,
+        });
         setMovie(data.Search);
       } else {
         setIsError({
           show: true,
-          msg: data.error,
+          msg: data.Error,
         });
       }
     } catch (error) {
@@ -36,8 +40,13 @@ const AppProvider = ({ children }) => {
 
   //useEffect to get the data repeatedly
   useEffect(() => {
-    getMovies(`${API_URL}&s=${query}`);
-  },[query]);
+    //Debouncing function
+    let timeOut = setTimeout(() => {
+      getMovies(`${API_URL}&s=${query}`);
+    }, 800);
+
+    return () => clearTimeout(timeOut);
+  }, [query]);
 
   return (
     <AppContext.Provider value={{ movie, isError, query, setQuery }}>
