@@ -1,16 +1,29 @@
-import React, { useContext } from 'react'
-import { AppContext } from '../context'
+import React, { useContext } from "react";
+import { NavLink } from "react-router-dom";
+import { AppContext } from "../context";
 
 const Movies = () => {
-  const { movie } = useContext(AppContext)
+  const { movie } = useContext(AppContext);
   return (
     <>
-      {movie.map((currMovie) => {
-        return <h1>{currMovie.Title}</h1>
-      })}
+      <section>
+        <div className="">
+          {movie.map((currMovie) => {
+            const { imdbID, Title, Poster } = currMovie;
+            return( <NavLink to={`movie/${imdbID}`} key={imdbID}>
+              <div className="card">
+                <div>
+                  <h2>{Title}</h2>
+                  <img src={Poster} alt={imdbID} />
+                </div>
+              </div>
+            </NavLink>
+            );
+          })}
+        </div>
+      </section>
     </>
-  )
-}
+  );
+};
 
-export default Movies
-
+export default Movies;
