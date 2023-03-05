@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 const AppContext = createContext();
 
-export const API_URL = `http://www.omdbapi.com/?apikey=${
+export const API_URL = `https://www.omdbapi.com/?apikey=${
   import.meta.env.VITE_APP_API_KEY
 }`;
 
