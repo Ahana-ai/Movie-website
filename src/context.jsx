@@ -43,7 +43,7 @@ const AppProvider = ({ children }) => {
     //Debouncing function
     let timeOut = setTimeout(() => {
       getMovies(`${API_URL}&s=${query}`);
-    }, 800);
+    }, 500);
 
     return () => clearTimeout(timeOut);
   }, [query]);

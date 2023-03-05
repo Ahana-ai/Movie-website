@@ -8,7 +8,7 @@ const Movies = () => {
   return (
     <>
       <section>
-        <div className="">
+        <div className="container movie-card">
           {movie.map((currMovie) => {
             const { imdbID, Title, Poster } = currMovie;
             //use js to cut the string short and replace it with dots
@@ -17,7 +17,7 @@ const Movies = () => {
               <div className="card">
                 <div>
                   <h2>{movieName > 15 ? `movieName...` : movieName}</h2>
-                  <img src={Poster} alt={imdbID} />
+                  <img src={Poster} alt={imdbID} className="h-52 m-auto" />
                 </div>
               </div>
             </NavLink>
